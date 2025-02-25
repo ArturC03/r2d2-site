@@ -171,11 +171,11 @@ export default function Docs() {
                     {/* Main Documentation Content */}
                     <div className="flex-grow p-6 md:p-8 overflow-auto">
                         <div className="max-w-3xl mx-auto">
-                            <h1 className="text-3xl font-bold mb-6">Introdução à MinhaPL</h1>
+                            <h1 className="text-3xl font-bold mb-6">Introdução à R2D2</h1>
 
                             <div className="prose max-w-none">
                                 <p className="lead text-xl mb-6">
-                                    MinhaPL é uma linguagem de programação moderna projetada para
+                                    R2D2 é uma linguagem de programação moderna projetada para
                                     simplicidade, eficiência e expressividade. Esta documentação o
                                     guiará por todos os aspectos da linguagem, desde a instalação até
                                     conceitos avançados.
@@ -184,7 +184,7 @@ export default function Docs() {
                                 {/* Add other sections here... */}
 
                                 <div className="mt-8">
-                                    <Button>Próximo: Instalação</Button>
+                                    <Button variant="outline">Próximo: Instalação</Button>
                                 </div>
                             </div>
                         </div>
