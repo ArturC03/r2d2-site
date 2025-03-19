@@ -1,24 +1,27 @@
 // src/pages/Welcome.js
-import React, { useState } from 'react';
-import { Head } from '@inertiajs/react';
+import Footer from '@/components/footer';
+import LinkButton from '@/components/link-button';
+import Navbar from '@/components/navbar';
 import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Separator } from '@/components/ui/separator';
-import { FaApple, FaWindows, FaLinux } from 'react-icons/fa';
-import Navbar from '@/components/navbar';  // Importando Navbar
-import Footer from '@/components/footer';  // Importando Footer
-import {
-    DropdownMenu,
-    DropdownMenuTrigger,
-    DropdownMenuContent,
-    DropdownMenuItem,
-} from '@/components/ui/dropdown-menu';
+import { Head } from '@inertiajs/react';
+import { FaApple, FaLinux, FaWindows } from 'react-icons/fa';
+
+interface Platform {
+    name: string;
+    icon: JSX.Element;
+}
 
 export default function Welcome() {
+    const platforms: Platform[] = [
+        { name: 'MacOS', icon: <FaApple /> },
+        { name: 'Windows', icon: <FaWindows /> },
+        { name: 'Linux', icon: <FaLinux /> },
+    ];
 
     const handleDownload = (platform: string) => {
-        // Lógica para lidar com o download para a plataforma selecionada
         console.log(`Downloading for ${platform}`);
-        // Você pode redirecionar o usuário para o link de download específico aqui
     };
 
     return (
@@ -28,26 +31,22 @@ export default function Welcome() {
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
 
-            <div className="min-h-screen flex flex-col">
-                <Navbar /> {/* Adicionando a Navbar aqui */}
+            <div className="flex min-h-screen flex-col">
+                <Navbar />
 
-                {/* Conteúdo Principal */}
                 <main className="flex-grow">
                     <div className="container mx-auto px-4 py-16">
-                        {/* Logo e Descrição */}
-                        <div className="flex flex-col items-center text-center mb-16">
-                            <div className="bg-gray-900 w-48 h-48 rounded-full mb-8 flex items-center justify-center">
+                        <div className="mb-16 flex flex-col items-center text-center">
+                            <div className="mb-8 flex h-48 w-48 items-center justify-center rounded-full bg-gray-900">
                                 <span className="text-4xl font-bold">Logo</span>
                             </div>
                             <Separator className="max-w-2xl" />
-                            <p className="text-xl max-w-2xl mb-8">
-                                A modern programming language, not efficient and not intuitive.
-                                Designed to be done and not perform, allowing developers to express
-                                simple ideas in a complex way.
+                            <p className="my-4 max-w-2xl text-xl">
+                                A modern programming language, not efficient and not intuitive. Designed to be done and not perform, allowing
+                                developers to express simple ideas in a complex way.
                             </p>
 
-                            {/* Botões de Ação */}
-                            <div className="flex flex-col sm:flex-row gap-4">
+                            <div className="flex flex-col gap-4 sm:flex-row">
                                 <DropdownMenu>
                                     <DropdownMenuTrigger asChild>
                                         <Button size="lg" variant="default">
@@ -55,36 +54,31 @@ export default function Welcome() {
                                         </Button>
                                     </DropdownMenuTrigger>
                                     <DropdownMenuContent>
-                                        <DropdownMenuItem onSelect={() => handleDownload('MacOS')}>
-                                            <FaApple className="mr-2" />
-                                            MacOS
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem onSelect={() => handleDownload('Windows')}>
-                                            <FaWindows className="mr-2" />
-                                            Windows
-                                        </DropdownMenuItem>
-                                        <DropdownMenuItem onSelect={() => handleDownload('Linux')}>
-                                            <FaLinux className="mr-2" />
-                                            Linux
-                                        </DropdownMenuItem>
+                                        {platforms.map(({ name, icon }) => (
+                                            <DropdownMenuItem key={name} onSelect={() => handleDownload(name)}>
+                                                <span className="mr-2">{icon}</span>
+                                                {name}
+                                            </DropdownMenuItem>
+                                        ))}
                                     </DropdownMenuContent>
                                 </DropdownMenu>
-                                <Button size="lg" variant="outline">
+
+                                <LinkButton href="/docs" size="lg" variant="outline">
                                     Get Started
-                                </Button>
+                                </LinkButton>
                             </div>
                         </div>
 
-                        {/* Citação e Exemplo de Código */}
-                        <div className="mt-24 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+                        <div className="mt-24 grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
                             <div>
-                                <h2 className="text-5xl sm:text-6xl font-bold leading-tight">
-                                    Kinda Simple.<br />
+                                <h2 className="text-5xl leading-tight font-bold sm:text-6xl">
+                                    Kinda Simple.
+                                    <br />
                                     But Not That Simple.
                                 </h2>
                             </div>
-                            <div className="bg-gray-900 rounded-lg shadow-xl p-6">
-                                <pre className="text-green-400 overflow-auto">
+                            <div className="rounded-lg bg-gray-900 p-6 shadow-xl">
+                                <pre className="overflow-auto text-green-400">
                                     <code>
                                         {`pseudo fn main() {
   HelloWorld();
@@ -100,7 +94,7 @@ fn HelloWorld() {
                     </div>
                 </main>
 
-                <Footer /> {/* Adicionando o Footer aqui */}
+                <Footer />
             </div>
         </>
     );
