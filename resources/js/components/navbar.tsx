@@ -1,17 +1,20 @@
-import React, { useState } from 'react';
+import LinkButton from '@/components/link-button';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu } from 'lucide-react';
-import LinkButton from '@/components/link-button';
+import { useState } from 'react';
+import AppLogo from './app-logo';
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
         <header className="w-full border-b shadow-sm">
-            <div className="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div className="container mx-auto flex items-center justify-between px-4 py-3">
                 <div className="flex items-center">
-                    <LinkButton variant="ghost" href="/"><span className="text-xl font-bold">R2D2</span></LinkButton>
+                    <LinkButton className="h-12" variant="ghost" href="/">
+                        <AppLogo />
+                    </LinkButton>
                 </div>
 
                 {/* Navegação para Desktop */}
@@ -29,10 +32,10 @@ export default function Navbar() {
                             </Button>
                         </SheetTrigger>
                         <SheetContent>
-                            <div className="flex justify-center items-center">
-                                <span className="text-xl font-bold">R2D2</span>
+                            <div className="flex h-16 items-center justify-center text-center">
+                                <AppLogo />
                             </div>
-                            <div className="flex flex-col ">
+                            <div className="flex flex-col">
                                 <LinkButton href="/">Home</LinkButton>
                                 <LinkButton href="/docs">Documentation</LinkButton>
                             </div>

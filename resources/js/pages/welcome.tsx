@@ -1,16 +1,17 @@
-// src/pages/Welcome.js
+import AppLogo from '@/components/app-logo';
 import Footer from '@/components/footer';
 import LinkButton from '@/components/link-button';
 import Navbar from '@/components/navbar';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Separator } from '@/components/ui/separator';
 import { Head } from '@inertiajs/react';
+import React from 'react';
 import { FaApple, FaLinux, FaWindows } from 'react-icons/fa';
+import { Img } from 'react-image';
 
 interface Platform {
     name: string;
-    icon: JSX.Element;
+    icon: React.ReactNode;
 }
 
 export default function Welcome() {
@@ -30,70 +31,64 @@ export default function Welcome() {
                 <link rel="preconnect" href="https://fonts.bunny.net" />
                 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
             </Head>
-
-            <div className="flex min-h-screen flex-col">
+            <div className="bg-background text-foreground flex min-h-screen flex-col font-sans">
                 <Navbar />
-
-                <main className="flex-grow">
-                    <div className="container mx-auto px-4 py-16">
-                        <div className="mb-16 flex flex-col items-center text-center">
-                            <div className="mb-8 flex h-48 w-48 items-center justify-center rounded-full bg-gray-900">
-                                <span className="text-4xl font-bold">Logo</span>
+                <main className="container mx-auto grid flex-grow items-center gap-16 px-4 py-16 lg:grid-cols-2">
+                    <div className="space-y-8">
+                        <div className="m-0 flex items-center space-x-4">
+                            <div className="w-64">
+                                <AppLogo />
                             </div>
-                            <Separator className="max-w-2xl" />
-                            <p className="my-4 max-w-2xl text-xl">
-                                A modern programming language, not efficient and not intuitive. Designed to be done and not perform, allowing
-                                developers to express simple ideas in a complex way.
-                            </p>
-
-                            <div className="flex flex-col gap-4 sm:flex-row">
-                                <DropdownMenu>
-                                    <DropdownMenuTrigger asChild>
-                                        <Button size="lg" variant="default">
-                                            Download v0.0.1
-                                        </Button>
-                                    </DropdownMenuTrigger>
-                                    <DropdownMenuContent>
-                                        {platforms.map(({ name, icon }) => (
-                                            <DropdownMenuItem key={name} onSelect={() => handleDownload(name)}>
-                                                <span className="mr-2">{icon}</span>
-                                                {name}
-                                            </DropdownMenuItem>
-                                        ))}
-                                    </DropdownMenuContent>
-                                </DropdownMenu>
-
-                                <LinkButton href="/docs" size="lg" variant="outline">
-                                    Get Started
-                                </LinkButton>
-                            </div>
+                            <div className="bg-primary text-secondary rounded-full px-4 py-1 text-sm font-semibold">ALPHA v0.0.1</div>
                         </div>
-
-                        <div className="mt-24 grid grid-cols-1 items-center gap-8 lg:grid-cols-2">
-                            <div>
-                                <h2 className="text-5xl leading-tight font-bold sm:text-6xl">
-                                    Kinda Simple.
-                                    <br />
-                                    But Not That Simple.
-                                </h2>
-                            </div>
-                            <div className="rounded-lg bg-gray-900 p-6 shadow-xl">
-                                <pre className="overflow-auto text-green-400">
-                                    <code>
-                                        {`pseudo fn main() {
+                        <h1 className="text-foreground text-5xl leading-tight font-bold">
+                            Kinda simple
+                            <br />
+                            But not that simple
+                        </h1>
+                        <p className="text-muted-foreground text-xl">
+                            Not efficient. Not intuitive. A programming language designed to make simple ideas complex, pushing the boundaries of
+                            developer experience.
+                        </p>
+                        <div className="flex space-x-4">
+                            <DropdownMenu>
+                                <DropdownMenuTrigger asChild>
+                                    <Button size="lg" variant="default">
+                                        Download
+                                    </Button>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent>
+                                    {platforms.map(({ name, icon }) => (
+                                        <DropdownMenuItem key={name} onSelect={() => handleDownload(name)}>
+                                            <span className="mr-2">{icon}</span>
+                                            {name}
+                                        </DropdownMenuItem>
+                                    ))}
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                            <LinkButton href="/docs" size="lg" variant="outline">
+                                Get Started
+                            </LinkButton>
+                        </div>
+                    </div>
+                    <div className="relative hidden lg:block">
+                        <div className="bg-primary/10 absolute inset-0 -z-10 rounded-xl blur-3xl"></div>
+                        <Img src="/images/rexDino.svg" alt="Rex Dino Mascot" className="mx-auto mb-6 h-auto w-full max-w-xs opacity-80" />
+                        <div className="bg-secondary relative z-10 rounded-xl p-8 shadow-2xl">
+                            <pre className="text-primary overflow-auto">
+                                <code>
+                                    {`pseudo fn main() {
   HelloWorld();
 }
-
 fn HelloWorld() {
-  println("Hello World!");
+  println("Not your
+  average language!");
 }`}
-                                    </code>
-                                </pre>
-                            </div>
+                                </code>
+                            </pre>
                         </div>
                     </div>
                 </main>
-
                 <Footer />
             </div>
         </>

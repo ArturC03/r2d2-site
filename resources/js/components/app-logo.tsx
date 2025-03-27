@@ -1,14 +1,19 @@
-import AppLogoIcon from './app-logo-icon';
+import { useAppearance } from '@/hooks/use-appearance';
+import { Img } from 'react-image';
 
-export default function AppLogo() {
-    return (
-        <>
-            <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-md">
-                <AppLogoIcon className="size-5 fill-current text-white dark:text-black" />
-            </div>
-            <div className="ml-1 grid flex-1 text-left text-sm">
-                <span className="mb-0.5 truncate leading-none font-semibold">Laravel Starter Kit</span>
-            </div>
-        </>
-    );
+export default function AppLogo(width: any) {
+    const { appearance } = useAppearance();
+    let svgPath = '';
+    switch (appearance) {
+        case 'dark':
+            svgPath = '/images/logoR2D2dark.svg';
+            break;
+        case 'light':
+            svgPath = '/images/logoR2D2light.svg';
+            break;
+        default:
+            svgPath = '/images/logoR2D2light.svg';
+            break;
+    }
+    return <Img src={svgPath} alt="Logo" width={width ?? 96} className="h-full w-full" />;
 }
